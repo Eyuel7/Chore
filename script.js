@@ -3,6 +3,7 @@ let doorImage2 = document.getElementById("door2");
 let doorImage3 = document.getElementById("door3");
 let startButton = document.getElementById("start");
 let score = document.getElementById("scoreNum");
+let highScore = document.getElementById("highScoreNum");
 
 let botDoorPath = 'https://content.codecademy.com/projects/chore-door/images/robot.svg';
 let beachDoorPath = 'https://content.codecademy.com/projects/chore-door/images/beach.svg';
@@ -14,7 +15,8 @@ let openDoor1;
 let openDoor2;
 let openDoor3;
 let currentPlaying = true;
-let count = 0;
+let scoreCount = 0;
+let highScoreCount = 0;
 
 function isBot(door){
   if(door.src === botDoorPath){
@@ -113,13 +115,18 @@ startButton.onclick = () => {
 const gameOver = (status) => {
   if(status === 'win'){
     startButton.innerHTML = 'You win! Play again?';
-    count++;
-    score.innerHTML = count;
+    scoreCount++;
+    score.innerHTML = scoreCount;
+
+    if(highScoreCount < scoreCount){
+      highScoreCount++;
+      highScore.innerHTML = highScoreCount;
+    }
   }
   else{
     startButton.innerHTML = 'Game over! Play again?';
-    count = 0;
-    score.innerHTML = count;
+    scoreCount = 0;
+    score.innerHTML = scoreCount;
   }
   currentPlaying = false;
 }
